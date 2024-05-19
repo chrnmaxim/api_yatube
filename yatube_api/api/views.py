@@ -9,7 +9,7 @@ from .serializers import CommentSerializer, GroupSerializer, PostSerializer
 
 
 class CommentViewSet(viewsets.ModelViewSet):
-    """ViewSet для комментариев к постам."""
+    """ViewSet for post's comments."""
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated, AuthorPermission]
@@ -24,13 +24,13 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet для отображения групп."""
+    """ViewSet for displaying groups."""
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    """ViewSet для постов."""
+    """ViewSet for posts."""
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticated, AuthorPermission]
