@@ -12,15 +12,17 @@ class CommentViewSet(viewsets.ModelViewSet):
     """ViewSet for post's comments."""
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated, AuthorPermission]
+    permission_classes = (IsAuthenticated, AuthorPermission)
+
+    def get_post(self):
+        return get_object_or_404(Post, id=self.kwargs.get('post_id'))
 
     def perform_create(self, serializer):
-        post = get_object_or_404(Post, id=self.kwargs.get('post_id'))
-        serializer.save(author=self.request.user, post=post)
+        serializer.save(author=self.request.user,
+                        post=CommentViewSet.get_post(self))
 
     def get_queryset(self):
-        post = get_object_or_404(Post, id=self.kwargs.get('post_id'))
-        return post.comments.all()
+        return CommentViewSet.get_post(self).comments.all()
 
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
@@ -33,7 +35,7 @@ class PostViewSet(viewsets.ModelViewSet):
     """ViewSet for posts."""
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [IsAuthenticated, AuthorPermission]
+    permission_classes = (IsAuthenticated, AuthorPermission)
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
