@@ -3,12 +3,23 @@ from django.db import models
 
 User = get_user_model()
 
+CHARS_LIMIT: int = 30
+MAX_LENGTH: int = 256
+
 
 class Group(models.Model):
     """Model for groups."""
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True)
-    description = models.TextField()
+    title = models.CharField(
+        'Название',
+        max_length=MAX_LENGTH
+    )
+    slug = models.SlugField(
+        'Идентификатор',
+        unique=True
+    )
+    description = models.TextField(
+        'Описание'
+    )
 
     class Meta:
         """Inner Meta class of Group model."""
@@ -18,24 +29,34 @@ class Group(models.Model):
 
     def __str__(self):
         """Displays Group title in admin panel."""
-        return self.title
+        return self.title[:CHARS_LIMIT]
 
 
 class Post(models.Model):
     """Model for posts."""
-    text = models.TextField()
+    text = models.TextField(
+        'Текст'
+    )
     pub_date = models.DateTimeField(
-        'Дата публикации', auto_now_add=True
+        'Дата публикации',
+        auto_now_add=True
     )
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='posts'
+        User,
+        on_delete=models.CASCADE,
+        related_name='posts'
     )
     image = models.ImageField(
-        upload_to='posts/', null=True, blank=True
-    )  # поле для картинки
+        'Изображение',
+        upload_to='posts/',
+        blank=True
+    ) 
     group = models.ForeignKey(
-        Group, on_delete=models.SET_NULL,
-        related_name='posts', blank=True, null=True
+        Group,
+        on_delete=models.SET_NULL,
+        related_name='posts',
+        blank=True,
+        null=True
     )
 
     class Meta:
@@ -46,20 +67,28 @@ class Post(models.Model):
 
     def __str__(self):
         """Displays Post text in admin panel."""
-        return self.text
+        return self.text[:CHARS_LIMIT]
 
 
 class Comment(models.Model):
     """Model for post's comments."""
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='comments'
+        User,
+        on_delete=models.CASCADE,
+        related_name='comments'
     )
     post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name='comments'
+        Post,
+        on_delete=models.CASCADE,
+        related_name='comments'
     )
-    text = models.TextField()
+    text = models.TextField(
+        'Текст'
+    )
     created = models.DateTimeField(
-        'Дата добавления', auto_now_add=True, db_index=True
+        'Дата добавления',
+        auto_now_add=True,
+        db_index=True
     )
 
     class Meta:
@@ -70,4 +99,4 @@ class Comment(models.Model):
 
     def __str__(self):
         """Displays Comment text in admin panel."""
-        return self.text
+        return self.text[:CHARS_LIMIT]
