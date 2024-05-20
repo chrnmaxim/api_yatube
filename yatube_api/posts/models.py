@@ -50,7 +50,7 @@ class Post(models.Model):
         'Изображение',
         upload_to='posts/',
         blank=True
-    ) 
+    )
     group = models.ForeignKey(
         Group,
         on_delete=models.SET_NULL,
