@@ -4,7 +4,7 @@ attrs==22.1.0
 colorama==0.4.6
 Django==3.2
 djangorestframework==3.12.4
-flake8==5.0.4
+flake8==7.0.0
 iniconfig==1.1.1
 mccabe==0.7.0
 packaging==21.3
