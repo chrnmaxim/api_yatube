@@ -58,4 +58,3 @@ python manage.py createsuperuser
 ```bash
 python manage.py runserver 
 ```
-К достпным эндпоинтам можно обращаться с помощью [Postman](https://www.postman.com/).
