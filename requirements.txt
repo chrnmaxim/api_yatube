@@ -4,7 +4,9 @@ attrs==22.1.0
 colorama==0.4.6
 Django==3.2
 djangorestframework==3.12.4
+drf-yasg==1.21.7
 flake8==7.0.0
+inflection==0.5.1
 iniconfig==1.1.1
 mccabe==0.7.0
 packaging==21.3
@@ -19,5 +21,7 @@ pytest-django==4.4.0
 pytest-pythonpath==0.7.3
 python-dotenv==1.0.1
 pytz==2022.6
+PyYAML==6.0.1
 sqlparse==0.4.3
 toml==0.10.2
+uritemplate==4.1.1
