@@ -58,3 +58,14 @@ python manage.py createsuperuser
 ```bash
 python manage.py runserver 
 ```
+Документация API в формате Swagger доступна по адресу:
+
+```bash
+http://127.0.0.1:8000/swagger/
+```
+
+Документация API в формате ReDoc доступна по адресу:
+```bash
+http://127.0.0.1:8000/redoc/
+```
+К доступным эндпоинтам также можно обращаться с помощью [Postman](https://www.postman.com/).
